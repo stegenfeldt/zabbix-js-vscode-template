@@ -178,7 +178,7 @@ In many Zabbix contexts, using `return zabbixScript(value);` as the last line is
 - `script-item`: Typically receives a JSON string in `value`.
 - `webhook`: Usually receives JSON-like payload in `value`.
 
-The harness shapes input per mode and passes `value` into your script function. If `params.value` is not set, the harness automatically builds the input JSON from `url`, `expectedStatusCode`, and `searchText`.
+The harness shapes input per mode and passes `value` into your script function. If `params.value` is not set, the harness automatically builds the input JSON, for example `url`, `expectedStatusCode`, and `searchText`.
 
 ## Cross-Platform Notes
 - macOS/Linux: `curl` is typically available by default.
@@ -189,7 +189,3 @@ The harness shapes input per mode and passes `value` into your script function. 
 - Never commit `params.json`.
 - Put real tokens only in local `params.json`.
 - Run `npm run scan:secrets` before commits.
-
-## Agent Workflow
-- New agents should read `agent-memory.md` and files in `agent-directory/` first.
-- Keep `agent-memory.md` updated with decisions and learned runtime behavior.
