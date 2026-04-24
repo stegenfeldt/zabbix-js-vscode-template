@@ -1,5 +1,6 @@
 {
-  "mode": "script-item",
-  "value": "{\"url\":\"https://example.com/health\",\"method\":\"GET\",\"timeoutMs\":5000}",
+  "url": "https://example.com",
+  "expectedStatusCode": 200,
+  "searchText": "Example Domain",
   "logLevel": 4
 }

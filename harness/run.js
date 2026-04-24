@@ -37,16 +37,36 @@ function parseArgs(argv) {
   return { mode: mode };
 }
 
+function buildPayloadFromParams(params) {
+  return {
+    url: params.url || "",
+    expectedStatusCode: params.expectedStatusCode,
+    searchText: params.searchText || ""
+  };
+}
+
 function shapeValue(mode, params) {
+  var payload;
+
+  if (params.url || params.searchText || typeof params.expectedStatusCode !== "undefined") {
+    payload = buildPayloadFromParams(params);
+  } else if (typeof params.value === "string") {
+    return params.value;
+  } else if (params.value && typeof params.value === "object") {
+    return JSON.stringify(params.value);
+  } else {
+    payload = buildPayloadFromParams(params);
+  }
+
   if (mode === "preprocessor") {
-    return String(params.value || "");
+    return JSON.stringify(payload);
   }
 
   if (mode === "webhook") {
-    return typeof params.value === "string" ? params.value : JSON.stringify(params.value || {});
+    return JSON.stringify(payload);
   }
 
-  return typeof params.value === "string" ? params.value : JSON.stringify(params.value || {});
+  return JSON.stringify(payload);
 }
 
 function loadScript(scriptPath) {

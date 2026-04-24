@@ -1,3 +1,5 @@
+// AUTO-GENERATED FILE. DO NOT EDIT DIRECTLY.
+// Source: script.js
 function zabbixScript(value) {
   // Parsed JSON input from Zabbix or the local harness.
   var payload;
@@ -53,8 +55,5 @@ function zabbixScript(value) {
   });
 }
 
-// Export for local Node.js harness debug runs.
-// This block is not required when pasting into Zabbix UI.
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = zabbixScript;
-}
+// Zabbix entrypoint call
+return zabbixScript(value);

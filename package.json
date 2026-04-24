@@ -8,6 +8,7 @@
     "debug:preprocessor": "node harness/run.js --mode preprocessor",
     "debug:script-item": "node harness/run.js --mode script-item",
     "debug:webhook": "node harness/run.js --mode webhook",
+    "build:zabbix": "node tools/build-zabbix-script.js",
     "lint": "eslint script.js harness/*.js tools/*.js",
     "check:duktape": "node tools/check-duktape.js",
     "scan:secrets": "node tools/scan-secrets.js",
