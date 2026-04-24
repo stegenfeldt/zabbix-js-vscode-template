@@ -7,6 +7,47 @@ Template repository for developing JavaScript used in Zabbix preprocessors, scri
 - Keep scripts compatible with Zabbix runtime expectations (ES5-oriented, synchronous `HttpRequest`).
 - Keep repository clean and safe for sharing.
 
+## Use This Repo As A Template
+Preferred (GitHub template flow):
+1. On the template repository page, click **Use this template**.
+2. Create a new repository from it.
+3. Clone your new repository locally.
+
+CLI clone flow (if template button is not available):
+1. Clone this repository:
+  - `git clone <this-template-repo-url> my-zabbix-script-project`
+2. Enter the project:
+  - `cd my-zabbix-script-project`
+3. Remove template git history and start fresh:
+  - `rm -rf .git`
+  - `git init`
+  - `git add .`
+  - `git commit -m "Initial commit from zabbix-js template"`
+4. Add your new remote origin:
+  - `git remote add origin <your-new-repo-url>`
+  - `git push -u origin main`
+
+After either flow, continue with the **60-Second Start (Recommended)** section below.
+
+## Air-Gapped Starter Bundle
+If developers cannot access the full repository directly, create a minimal starter package:
+
+1. Run:
+  - `npm run bundle:starter`
+2. Share:
+  - `dist/zabbix-js-starter.zip`
+
+The bundle contains only essential files to get started quickly:
+- `README.md`
+- `script.js`
+- `params.example.json`
+- `harness/` runtime files
+- `tools/init-project.js` and `tools/build-zabbix-script.js`
+- `.vscode/launch.json` and `.vscode/tasks.json`
+- `package.json` and `.gitignore`
+
+Inside the bundle, see `STARTER-NOTES.md` for offline-first setup steps.
+
 ## Repository Layout
 - `script.js`: Main Zabbix-compatible script under development.
 - `script.zabbix.js`: Auto-generated file to paste into Zabbix UI.
@@ -16,6 +57,20 @@ Template repository for developing JavaScript used in Zabbix preprocessors, scri
 - `tools/`: Compatibility and safety checks.
 - `agent-memory.md`: Canonical handoff notes for agents.
 - `todo.md`: Shared deferred action list.
+
+## 60-Second Start (Recommended)
+1. Install dependencies:
+  - `npm install`
+2. Initialize local project files and environment checks:
+  - `npm run init`
+3. Run first local test:
+  - `npm run debug:script-item`
+4. Build the Zabbix-ready script:
+  - `npm run build:zabbix`
+5. Copy `script.zabbix.js` into Zabbix.
+
+VS Code option:
+- Run task `Template: quick start`.
 
 ## Quick Start
 1. Install dependencies:
@@ -37,6 +92,8 @@ Use the launch configuration `Debug script.js via harness`.
 Breakpoints set in `script.js` remain stable because the debug target stays fixed at `harness/run.js` and loads `script.js` from the same path each run.
 
 ## Compatibility And Safety Checks
+- Golden-path local validation (recommended before commit):
+  - `npm run dev:check`
 - Lint for ES5-oriented syntax and restricted globals:
   - `npm run lint`
 - Optional Duktape check (auto-skips if `duk` is unavailable):
@@ -45,6 +102,18 @@ Breakpoints set in `script.js` remain stable because the debug target stays fixe
   - `npm run scan:secrets`
 - Run all checks:
   - `npm run check`
+
+## Setup Helpers
+- `npm run init`
+  - Creates `params.json` from `params.example.json` (if missing).
+  - Verifies Node.js version and curl availability.
+  - Prints immediate next steps.
+- `npm run dev:check`
+  - Runs lint.
+  - Runs debug script-item flow using `params.example.json`.
+  - Builds `script.zabbix.js`.
+  - Runs secret scan.
+  - Runs optional Duktape check.
 
 ## Script Contract
 - Keep main logic in `script.js`.

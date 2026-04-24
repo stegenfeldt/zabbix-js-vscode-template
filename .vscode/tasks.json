@@ -2,6 +2,108 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Template: npm install",
+      "type": "shell",
+      "command": "npm",
+      "args": ["install"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: init",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "init"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: quick start",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Template: npm install", "Template: init", "Template: debug script-item"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: debug",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "debug"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: debug preprocessor",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "debug:preprocessor"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: debug script-item",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "debug:script-item"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: debug webhook",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "debug:webhook"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: build zabbix script",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build:zabbix"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: bundle starter zip",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "bundle:starter"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: lint",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "lint"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: scan secrets",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "scan:secrets"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: check duktape",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "check:duktape"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: dev check",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev:check"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
       "label": "Template: full check",
       "type": "shell",
       "command": "npm",

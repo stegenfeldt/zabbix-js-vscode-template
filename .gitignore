@@ -5,6 +5,7 @@ params.json
 *.log
 .tmp/
 out/
+dist/
 
 # Node artifacts
 node_modules/
