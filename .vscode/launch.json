@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug script.js via harness",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/harness/run.js",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug preprocessor mode",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/harness/run.js",
+      "args": ["--mode", "preprocessor"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug webhook mode",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/harness/run.js",
+      "args": ["--mode", "webhook"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

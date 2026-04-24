@@ -1,0 +1,16 @@
+# Local runtime parameters and secrets
+params.json
+
+# Local outputs
+*.log
+.tmp/
+out/
+
+# Node artifacts
+node_modules/
+coverage/
+
+# OS/editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/*.local.json

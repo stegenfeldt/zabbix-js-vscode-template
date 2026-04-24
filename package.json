@@ -1,0 +1,22 @@
+{
+  "name": "zabbix-js-template-project",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Template harness for developing Zabbix-compatible JavaScript scripts locally",
+  "scripts": {
+    "debug": "node harness/run.js",
+    "debug:preprocessor": "node harness/run.js --mode preprocessor",
+    "debug:script-item": "node harness/run.js --mode script-item",
+    "debug:webhook": "node harness/run.js --mode webhook",
+    "lint": "eslint script.js harness/*.js tools/*.js",
+    "check:duktape": "node tools/check-duktape.js",
+    "scan:secrets": "node tools/scan-secrets.js",
+    "check": "npm run lint && npm run scan:secrets && npm run check:duktape"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
