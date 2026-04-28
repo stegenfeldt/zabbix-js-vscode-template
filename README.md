@@ -70,7 +70,7 @@ Inside the bundle, see `STARTER-NOTES.md` for offline-first setup steps.
 5. Copy `script.zabbix.js` into Zabbix.
 
 VS Code option:
-- Run task `Template: quick start`.
+- Run task `Setup: Quick Start (install + init + run)`.
 
 ## Quick Start
 1. Install dependencies:
