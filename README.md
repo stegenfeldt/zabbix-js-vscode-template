@@ -189,3 +189,12 @@ The harness shapes input per mode and passes `value` into your script function. 
 - Never commit `params.json`.
 - Put real tokens only in local `params.json`.
 - Run `npm run scan:secrets` before commits.
+
+## Agent Workflow
+If you're using an agent helper I have included an `agent-memory.md` file with some basic instructions as a starting point. 
+Have your agent read and understand `agent-memory.md` in your session.
+I have also included a shared `todo.md`-file that can be used to plan your new script as well as for the agent to add tasks that must be handed over to the developer to progress.
+
+- New agents should read `agent-memory.md` and files in `agent-directory/` first.
+- Keep `agent-memory.md` updated with decisions and learned runtime behavior.
+- Use `todo.md` as an AI to developer hand-off point.

@@ -1,5 +1,7 @@
 function zabbixScript(value) {
-  // Parsed JSON input from Zabbix or the local harness.
+  // Example intent: script-item style logic that expects a JSON object payload.
+  // In this template, script-item and webhook harness runs may pass an object directly,
+  // while Zabbix runtime typically passes a string.
   var payload;
   // Zabbix-like synchronous HTTP client provided by the runtime/harness.
   var request;
@@ -14,11 +16,17 @@ function zabbixScript(value) {
 
   Zabbix.log(4, "script.js invoked");
 
-  // Zabbix passes input as a string. Parse it once and work with an object.
-  try {
-    payload = JSON.parse(value);
-  } catch (error) {
-    throw "Input value must be a valid JSON string";
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    payload = value;
+  } else if (typeof value === "string") {
+    // Parse JSON string input from Zabbix runtime or from harness string mode.
+    try {
+      payload = JSON.parse(value);
+    } catch (error) {
+      throw "Input value must be a JSON object or a JSON string object";
+    }
+  } else {
+    throw "Input value must be a JSON object or a JSON string object";
   }
 
   url = payload.url;
@@ -52,6 +60,11 @@ function zabbixScript(value) {
     searchStringFound: searchStringFound
   });
 }
+
+// Preprocessor scripts usually receive a single raw value (commonly a string),
+// transform it, and return the transformed value.
+// Webhook scripts usually receive an event/alert payload object and often map
+// it into one or more outbound API requests.
 
 // Export for local Node.js harness debug runs.
 // This block is not required when pasting into Zabbix UI.

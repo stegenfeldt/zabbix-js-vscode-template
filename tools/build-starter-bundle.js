@@ -9,6 +9,8 @@ var zipPath = path.join(distDir, "zabbix-js-starter.zip");
 
 var essentialFiles = [
   "README.md",
+  "todo.md",
+  "agent-memory.md",
   ".gitignore",
   "package.json",
   "script.js",
@@ -18,8 +20,12 @@ var essentialFiles = [
   "harness/HttpRequest.js",
   "tools/init-project.js",
   "tools/build-zabbix-script.js",
+  "tools/check-duktape.js",
+  "tools/dev-check.js",
+  "tools/scan-secrets.js",
   ".vscode/launch.json",
-  ".vscode/tasks.json"
+  ".vscode/tasks.json",
+  ".eslintrc.cjs"
 ];
 
 function ensureDir(dirPath) {
