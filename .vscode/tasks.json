@@ -2,7 +2,8 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Template: npm install",
+      "label": "Setup: Install Dependencies",
+      "detail": "Run npm install — do this once after cloning the project",
       "type": "shell",
       "command": "npm",
       "args": ["install"],
@@ -10,7 +11,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: init",
+      "label": "Setup: Initialize Project",
+      "detail": "Create params.json from example — configure your script inputs here",
       "type": "shell",
       "command": "npm",
       "args": ["run", "init"],
@@ -18,13 +20,15 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: quick start",
+      "label": "Setup: Quick Start (install + init + run)",
+      "detail": "First-time setup: installs deps, initializes params, then runs script in script-item mode",
       "dependsOrder": "sequence",
-      "dependsOn": ["Template: npm install", "Template: init", "Template: debug script-item"],
+      "dependsOn": ["Setup: Install Dependencies", "Setup: Initialize Project", "Run: Script (script-item mode)"],
       "problemMatcher": []
     },
     {
-      "label": "Template: debug",
+      "label": "Run: Script (default mode)",
+      "detail": "Run script.js using the mode set in params.json",
       "type": "shell",
       "command": "npm",
       "args": ["run", "debug"],
@@ -32,7 +36,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: debug preprocessor",
+      "label": "Run: Script (preprocessor mode)",
+      "detail": "Run script.js as a Zabbix preprocessor — transforms a raw value",
       "type": "shell",
       "command": "npm",
       "args": ["run", "debug:preprocessor"],
@@ -40,7 +45,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: debug script-item",
+      "label": "Run: Script (script-item mode)",
+      "detail": "Run script.js as a Zabbix script item — makes HTTP requests and returns a value",
       "type": "shell",
       "command": "npm",
       "args": ["run", "debug:script-item"],
@@ -48,7 +54,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: debug webhook",
+      "label": "Run: Script (webhook mode)",
+      "detail": "Run script.js as a Zabbix media-type webhook — sends alert notifications",
       "type": "shell",
       "command": "npm",
       "args": ["run", "debug:webhook"],
@@ -56,7 +63,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: build zabbix script",
+      "label": "Build: Generate Zabbix Script",
+      "detail": "Bundle script.js into script.zabbix.js — this is the file you paste into Zabbix",
       "type": "shell",
       "command": "npm",
       "args": ["run", "build:zabbix"],
@@ -64,7 +72,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: bundle starter zip",
+      "label": "Build: Bundle Starter ZIP",
+      "detail": "Package a clean starter bundle as a ZIP for sharing or archiving",
       "type": "shell",
       "command": "npm",
       "args": ["run", "bundle:starter"],
@@ -72,7 +81,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: lint",
+      "label": "Check: Lint Code",
+      "detail": "Run ESLint on script.js and harness/tools — catch syntax and style issues",
       "type": "shell",
       "command": "npm",
       "args": ["run", "lint"],
@@ -80,7 +90,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: scan secrets",
+      "label": "Check: Scan for Secrets",
+      "detail": "Scan for accidentally committed credentials, tokens, or API keys",
       "type": "shell",
       "command": "npm",
       "args": ["run", "scan:secrets"],
@@ -88,7 +99,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: check duktape",
+      "label": "Check: Duktape Compatibility",
+      "detail": "Verify script.js uses only ES5 — Zabbix runs Duktape, not modern Node.js",
       "type": "shell",
       "command": "npm",
       "args": ["run", "check:duktape"],
@@ -96,7 +108,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: dev check",
+      "label": "Check: Dev Readiness",
+      "detail": "Verify project is set up correctly before running your script",
       "type": "shell",
       "command": "npm",
       "args": ["run", "dev:check"],
@@ -104,7 +117,8 @@
       "problemMatcher": []
     },
     {
-      "label": "Template: full check",
+      "label": "Check: Full (lint + secrets + duktape)",
+      "detail": "Run all checks — use before committing or submitting your script",
       "type": "shell",
       "command": "npm",
       "args": ["run", "check"],

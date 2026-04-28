@@ -37,36 +37,35 @@ function parseArgs(argv) {
   return { mode: mode };
 }
 
-function buildPayloadFromParams(params) {
-  return {
-    url: params.url || "",
-    expectedStatusCode: params.expectedStatusCode,
-    searchText: params.searchText || ""
-  };
-}
-
 function shapeValue(mode, params) {
-  var payload;
-
-  if (params.url || params.searchText || typeof params.expectedStatusCode !== "undefined") {
-    payload = buildPayloadFromParams(params);
-  } else if (typeof params.value === "string") {
-    return params.value;
-  } else if (params.value && typeof params.value === "object") {
-    return JSON.stringify(params.value);
-  } else {
-    payload = buildPayloadFromParams(params);
-  }
+  var normalized = params;
 
   if (mode === "preprocessor") {
-    return JSON.stringify(payload);
+    if (params && typeof params === "object" && Object.prototype.hasOwnProperty.call(params, "value")) {
+      return params.value;
+    }
+
+    return params;
   }
 
-  if (mode === "webhook") {
-    return JSON.stringify(payload);
+  if (mode === "script-item" || mode === "webhook") {
+    if (typeof normalized === "string") {
+      try {
+        normalized = JSON.parse(normalized);
+      } catch (error) {
+        // Plain string input is allowed for developer-defined handling in script.js.
+        return normalized;
+      }
+    }
+
+    if (!normalized || typeof normalized !== "object" || Array.isArray(normalized)) {
+      throw new Error(mode + " mode expects a JSON object or a stringified JSON object");
+    }
+
+    return normalized;
   }
 
-  return JSON.stringify(payload);
+  throw new Error("Unsupported mode: " + mode);
 }
 
 function loadScript(scriptPath) {
