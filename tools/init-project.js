@@ -67,7 +67,7 @@ function printNextSteps() {
   process.stdout.write("\nNext steps:\n");
   process.stdout.write("1. Review and edit params.json\n");
   process.stdout.write("2. Run npm run debug:script-item\n");
-  process.stdout.write("3. Run npm run build:zabbix\n");
+  process.stdout.write("3. Run npm run build:zabbix to build all project scripts\n");
 }
 
 function main() {

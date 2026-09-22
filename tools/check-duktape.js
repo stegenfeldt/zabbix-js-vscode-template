@@ -10,7 +10,7 @@ function hasDuk() {
 }
 
 function runDuktapeCheck() {
-  var scriptPath;
+  var scriptPath = resolveScriptPath();
   var result;
 
   if (!hasDuk()) {
@@ -18,7 +18,6 @@ function runDuktapeCheck() {
     return 0;
   }
 
-  scriptPath = path.resolve(__dirname, "..", "script.js");
   result = childProcess.spawnSync("duk", [scriptPath], { encoding: "utf8" });
 
   if (result.error) {
@@ -37,8 +36,21 @@ function runDuktapeCheck() {
     return result.status;
   }
 
-  process.stdout.write("Duktape check passed for script.js\n");
+  process.stdout.write("Duktape check passed for " + path.basename(scriptPath) + "\n");
   return 0;
+}
+
+function resolveScriptPath() {
+  var args = process.argv.slice(2);
+  var i;
+
+  for (i = 0; i < args.length; i += 1) {
+    if (args[i] === "--script" && args[i + 1]) {
+      return path.resolve(args[i + 1]);
+    }
+  }
+
+  return path.resolve(__dirname, "..", "script.js");
 }
 
 process.exitCode = runDuktapeCheck();

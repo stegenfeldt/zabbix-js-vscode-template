@@ -2,11 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug script.js via harness",
+      "name": "Debug current script via harness",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/harness/run.js",
       "cwd": "${workspaceFolder}",
+      "args": ["--script", "${file}"],
       "console": "integratedTerminal",
       "skipFiles": ["<node_internals>/**"]
     },
@@ -15,7 +16,7 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/harness/run.js",
-      "args": ["--mode", "preprocessor"],
+      "args": ["--mode", "preprocessor", "--script", "${file}"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "skipFiles": ["<node_internals>/**"]
@@ -25,7 +26,7 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/harness/run.js",
-      "args": ["--mode", "webhook"],
+      "args": ["--mode", "webhook", "--script", "${file}"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "skipFiles": ["<node_internals>/**"]
