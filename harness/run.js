@@ -6,13 +6,19 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function resolveParamsPath() {
+function resolveParamsPath(scriptPath) {
   var root = path.resolve(__dirname, "..");
   var custom = process.env.ZABBIX_PARAMS_FILE;
+  var scriptParamsPath;
   var paramsPath;
 
   if (custom) {
     return path.resolve(root, custom);
+  }
+
+  scriptParamsPath = path.join(root, path.basename(scriptPath, ".js") + ".params.json");
+  if (fs.existsSync(scriptParamsPath)) {
+    return scriptParamsPath;
   }
 
   paramsPath = path.join(root, "params.json");
@@ -25,16 +31,20 @@ function resolveParamsPath() {
 
 function parseArgs(argv) {
   var mode = "script-item";
+  var scriptPath;
   var i;
 
   for (i = 0; i < argv.length; i += 1) {
     if (argv[i] === "--mode" && argv[i + 1]) {
       mode = argv[i + 1];
       i += 1;
+    } else if (argv[i] === "--script" && argv[i + 1]) {
+      scriptPath = argv[i + 1];
+      i += 1;
     }
   }
 
-  return { mode: mode };
+  return { mode: mode, scriptPath: scriptPath };
 }
 
 function shapeValue(mode, params) {
@@ -76,9 +86,9 @@ function loadScript(scriptPath) {
 function run() {
   var options = parseArgs(process.argv.slice(2));
   var root = path.resolve(__dirname, "..");
-  var paramsPath = resolveParamsPath();
+  var scriptPath = options.scriptPath ? path.resolve(options.scriptPath) : path.join(root, "script.js");
+  var paramsPath = resolveParamsPath(scriptPath);
   var params = readJson(paramsPath);
-  var scriptPath = path.join(root, "script.js");
   var scriptFn;
   var value;
   var output;
@@ -87,7 +97,7 @@ function run() {
 
   scriptFn = loadScript(scriptPath);
   if (typeof scriptFn !== "function") {
-    throw new Error("script.js must export a function for local harness execution");
+    throw new Error(path.basename(scriptPath) + " must export a function for local harness execution");
   }
 
   value = shapeValue(options.mode, params);

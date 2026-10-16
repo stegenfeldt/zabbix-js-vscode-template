@@ -63,11 +63,11 @@
       "problemMatcher": []
     },
     {
-      "label": "Build: Generate Zabbix Script",
-      "detail": "Bundle script.js into script.zabbix.js — this is the file you paste into Zabbix",
+      "label": "Build: Generate Zabbix Script for Current File",
+      "detail": "Bundle the active script into <scriptname>.zabbix.js — this is the file you paste into Zabbix",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "build:zabbix"],
+      "args": ["run", "build:zabbix", "--", "--script", "${file}"],
       "group": "build",
       "problemMatcher": []
     },
