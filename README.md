@@ -50,7 +50,7 @@ Inside the bundle, see `STARTER-NOTES.md` for offline-first setup steps.
 
 ## Repository Layout
 - `script.js`: Main Zabbix-compatible script under development.
-- `script.zabbix.js`: Auto-generated file to paste into Zabbix UI.
+- `<scriptname>.zabbix.js`: Auto-generated file to paste into Zabbix UI.
 - `params.example.json`: Committed example of local input parameters.
 - `params.json`: Local runtime parameters (ignored by git).
 - `harness/`: Local runtime harness and Zabbix global emulation.
@@ -65,9 +65,9 @@ Inside the bundle, see `STARTER-NOTES.md` for offline-first setup steps.
   - `npm run init`
 3. Run first local test:
   - `npm run debug:script-item`
-4. Build the Zabbix-ready script:
+4. Build all project-root Zabbix-ready scripts:
   - `npm run build:zabbix`
-5. Copy `script.zabbix.js` into Zabbix.
+5. Copy the matching `<scriptname>.zabbix.js` file into Zabbix.
 
 VS Code option:
 - Run task `Setup: Quick Start (install + init + run)`.
@@ -84,12 +84,13 @@ VS Code option:
    - `npm run debug:script-item`
    - `npm run debug:webhook`
 5. Generate Zabbix-ready script:
-  - `npm run build:zabbix`
+  - Run the VS Code task `Build: Generate Zabbix Script for Current File` with the script open in the active editor.
+  - The builder writes `<scriptname>.zabbix.js` for each project-root source script. To build only the active script, use the current-file task or pass `--script` explicitly.
 
 ## VS Code Debugging
-Use the launch configuration `Debug script.js via harness`.
+Use a launch configuration with the script open in the active editor. The harness receives the active `.js` file, so breakpoints in any project-root script are respected.
 
-Breakpoints set in `script.js` remain stable because the debug target stays fixed at `harness/run.js` and loads `script.js` from the same path each run.
+For `example.js`, the harness uses `example.params.json` when it exists. Otherwise it uses the shared `params.json`, then `params.example.json` as a fallback. The script must export a function for local harness execution.
 
 ## Compatibility And Safety Checks
 - Golden-path local validation (recommended before commit):
@@ -111,7 +112,7 @@ Breakpoints set in `script.js` remain stable because the debug target stays fixe
 - `npm run dev:check`
   - Runs lint.
   - Runs debug script-item flow using `params.example.json`.
-  - Builds `script.zabbix.js`.
+  - Builds a Zabbix file for every project-root source script.
   - Runs secret scan.
   - Runs optional Duktape check.
 
@@ -143,7 +144,7 @@ The script still demonstrates `HttpRequest.addHeader()` usage.
 7. Return a JSON string with `url`, `statusCode`, and `searchStringFound`.
 
 ## What To Copy Into Zabbix
-When you are done developing locally, run `npm run build:zabbix` and copy the content of `script.zabbix.js` into the Zabbix script field.
+When you are done developing locally, run the current-file build task and copy the content of the matching `<scriptname>.zabbix.js` file into the Zabbix script field.
 
 This is the recommended beginner workflow because it avoids manual edits.
 

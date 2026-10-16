@@ -12,7 +12,7 @@
     "build:zabbix": "node tools/build-zabbix-script.js",
     "bundle:starter": "node tools/build-starter-bundle.js",
     "dev:check": "node tools/dev-check.js",
-    "lint": "eslint script.js harness/*.js tools/*.js",
+    "lint": "eslint \"*.js\" \"harness/*.js\" \"tools/*.js\" --ignore-pattern \"*.zabbix.js\"",
     "check:duktape": "node tools/check-duktape.js",
     "scan:secrets": "node tools/scan-secrets.js",
     "check": "npm run lint && npm run scan:secrets && npm run check:duktape"
